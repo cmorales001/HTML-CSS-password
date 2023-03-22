@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Session</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="javascript/app.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <!--titulo-->
+      <div class="titulo">
+        <div class="imagen-titulo"><img
+          src="https://blog.udlap.mx/wp-content/uploads/2020/08/contrasena-.jpg"
+          alt="texto_alternativo"
+          width="150px"
+          height="100px"
+        /></div>
+        <div class="texto-titulo">SAFE PASSWORD</div>
+        <div class="texto-slogan">Contraseñas Seguras para tu Tranquilidad</div>
+      </div>
+      
+      
+
+      <!--Navegador-->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <div class="usuario">
+            usuario
+          </div>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="WFEditar.aspx"
+                  >Actualizar información</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  onserverclick="cerrarSesion"
+                  runat="server"
+                  >Cerrar Sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+      <div class="container">
+        
+        <div class="cont-left">
+          <!--curvas Estilo-->
+          
+          <!--contenido generador passwords-->
+          <div class="titulo-cont">GENERADOR DE CONTRASEÑAS SEGURAS</div>
+          
+          <div class="form-group">
+            <label for="txtGeneratedPassword">Tu contraseña:</label>
+            <div class="input-group">
+              <input type="text" id="txtGeneratedPassword1" class="form-control" readonly placeholder="Tu Contraseña">
+          
+              <div class="input-group-append">
+                <button id="btnRegenerate1" class="btn btn-outline-secondary" type="button">Copiar</button>
+              </div>
+            </div>
+          </div>
+          
+            <div class="titulo-cont">PERSONALIZA TU CONTRASEÑA</div>
+            <div class="form-group">
+              <label for="txtLength">Longitud:</label>
+              <input type="number" class="form-control" id="txtLength" min="8" max="32" value="8">
+            </div>
+ 
+            <div class="form-check">
+              <input type="checkbox" id="chkSpecialChars1" class="form-check-input">
+              <label class="form-check-label" for="chkSpecialChars1">Incluir caracteres especiales</label>
+            </div>
+            
+            <div class="form-check">
+              <input type="checkbox" id="chkNumbers" class="form-check-input">
+              <label class="form-check-label" for="chkNumbers" >Incluir Números</label>
+            </div>
+             
+            <label class="text-center" style="display: block;">Genera tu contraseña:</label>
+              
+            <button id="btnGeneratePass" class="glow-on-hover" type="button">Personalizada</button>
+            
+            <button id="btnFacilRecordar" class="glow-on-hover" type="button">Facil de Recordar</button>
+            
+        </div>
+        <div class="cont-rigth">
+          <div class="titulo-cont">GESTOR DE CONTRASEÑAS</div>
+          <div class="form-group">
+              <label for="txtNamePassword">Identificador(nombre):</label>
+              <input type="text" id="txtNamePassword" name="txtNamePassword" class="form-control" placeholder="Ingresa el identificador"/>
+              
+          </div>
+          <div class="form-group">
+              <label for="txtRegPassword">Contraseña:</label>
+              <input type="password" id="txtRegPassword" name="txtRegPassword" class="form-control" />
+              
+          </div>
+          <span class="error" style="color:red;"></span>
+          <button type="submit" id="btnRegPassword" name="btnRegPassword" class="glow-on-hover" onclick=" validarFormGestor()">Añadir</button>
+          
+
+
+          <div class="card p-3">
+            <div class="titulo-cont">TUS CONTRASEÑAS</div>
+            
+            <div class="form-group">
+              <asp:GridView
+                ID="GridView1"
+                runat="server"
+                AutoGenerateColumns="false"
+                OnRowEditing="GridView1_RowEditing"
+                OnRowCancelingEdit="GridView1_RowCancelingEdit"
+                OnRowUpdating="GridView1_RowUpdating"
+                OnRowDeleting="GridView1_RowDeleting"
+                OnRowCommand="GridView1_RowCommand"
+              >
+                <Columns>
+                  <asp:BoundField
+                    DataField="Nombre"
+                    HeaderText="Nombre"
+                    ReadOnly="true"
+                  />
+                  <asp:BoundField
+                    DataField="Password1"
+                    HeaderText="Contraseña"
+                  />
+                  <asp:ButtonField
+                    ButtonType="Button"
+                    Text="Copiar"
+                    CommandName="CopyRow"
+                  />
+                  <asp:ButtonField
+                    ButtonType="Button"
+                    Text="Editar"
+                    CommandName="EditRow"
+                  />
+                  <asp:ButtonField
+                    ButtonType="Button"
+                    Text="Eliminar"
+                    CommandName="deleteRow"
+                  />
+                </Columns>
+              </asp:GridView>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    
+  </body>
+</html>
